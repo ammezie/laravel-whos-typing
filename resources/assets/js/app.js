@@ -13,8 +13,31 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    data: {
+        messages: [],
+        newMessage: '',
+        typing: false
+    },
+
+    methods: {
+        isTying() {
+            // check if a user is typing
+        },
+
+        sendMessage() {
+            // add new message to messages array
+            this.messages.push({
+                user: Laravel.user,
+                message: this.newMessage
+            });
+
+            // clear input field
+            this.newMessage = '';
+
+            // persist to database
+        }
+    }
 });

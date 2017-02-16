@@ -5,10 +5,25 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Chats</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <ul>
+                        <li v-for="message in messages">
+                            @{{ message.message }}
+                        </li>
+                    </ul>
+                    <div>
+                        <div class="input-group">
+                            <input type="text" name="message" class="form-control" placeholder="Type your message here..." v-model="newMessage" @keyup.enter="sendMessage">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" @click="sendMessage">
+                                    Send
+                                </button>
+                            </span>
+                        </div>
+                        <span v-show="typing" class="help-block" style="font-style: italic;">typing...</span>
+                    </div>
                 </div>
             </div>
         </div>

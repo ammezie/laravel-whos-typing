@@ -13,4 +13,4 @@
 
 Auth::routes();
 
-Route::get('/chat', 'ChatsController@index');
+Route::get('/', 'ChatsController@index');
