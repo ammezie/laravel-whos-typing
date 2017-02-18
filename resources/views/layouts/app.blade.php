@@ -17,7 +17,8 @@
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
-            'user' => Auth::id(),
+            'user' => Auth::user(),
+            'pusherKey' => config('broadcasting.connections.pusher.key'),
         ]) !!};
     </script>
 </head>

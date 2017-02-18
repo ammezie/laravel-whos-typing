@@ -22,9 +22,32 @@ const app = new Vue({
         typing: false
     },
 
+    created() {
+        const channel = Echo.private('chat');
+            channel.listenForWhisper('typing', (e) => {
+               this.typing = e.typing;
+            });
+    },
+
     methods: {
-        isTying() {
+        isTyping() {
             // check if a user is typing
+            const channel = Echo.private('chat');
+            // channel.listen('pusher:subscription_succeeded', (e) => {
+                channel.whisper('typing', {
+                    typing: true
+                });
+            // });
+        },
+
+        notTyping() {
+            // check if a user is typing
+            const channel = Echo.private('chat');
+            // channel.listen('pusher:subscription_succeeded', (e) => {
+                channel.whisper('typing', {
+                    typing: false
+                });
+            // });
         },
 
         sendMessage() {

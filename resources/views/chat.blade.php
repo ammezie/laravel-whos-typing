@@ -15,7 +15,7 @@
                     </ul>
                     <div>
                         <div class="input-group">
-                            <input type="text" name="message" class="form-control" placeholder="Type your message here..." v-model="newMessage" @keyup.enter="sendMessage">
+                            <input type="text" name="message" class="form-control" placeholder="Type your message here..." v-model="newMessage" @keydown="isTyping" @keyup="notTyping" @keyup.enter="sendMessage">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" @click="sendMessage">
                                     Send

@@ -13,4 +13,10 @@
 
 Auth::routes();
 
-Route::get('/', 'ChatsController@index');
+Route::get('/', function () {
+    return view('chat');
+});
+
+Route::post('send', function () {
+    broadcast(new \App\Events\MessageSent($user, $message))->toOthers();
+});
