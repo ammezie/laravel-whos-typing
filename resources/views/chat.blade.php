@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <ul>
                         <li v-for="message in messages">
-                            @{{ message.message }}
+                            @{{ message.user.name }} - @{{ message.message }}
                         </li>
                     </ul>
                     <div>
