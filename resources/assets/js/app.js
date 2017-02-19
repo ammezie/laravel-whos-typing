@@ -19,35 +19,39 @@ const app = new Vue({
     data: {
         messages: [],
         newMessage: '',
+        user: '',
         typing: false
     },
 
     created() {
         const channel = Echo.private('chat');
             channel.listenForWhisper('typing', (e) => {
-               this.typing = e.typing;
+                this.user = e.user.name;
+                this.typing = e.typing;
             });
     },
 
     methods: {
         isTyping() {
-            // check if a user is typing
             const channel = Echo.private('chat');
-            // channel.listen('pusher:subscription_succeeded', (e) => {
+
+            // setInterval(function() {
                 channel.whisper('typing', {
+                    user: Laravel.user,
                     typing: true
                 });
-            // });
+            // }, 400);
         },
 
         notTyping() {
-            // check if a user is typing
             const channel = Echo.private('chat');
-            // channel.listen('pusher:subscription_succeeded', (e) => {
+            
+            // setTimeout(function() {
                 channel.whisper('typing', {
+                    user: Laravel.user,
                     typing: false
                 });
-            // });
+            // }, 400);
         },
 
         sendMessage() {

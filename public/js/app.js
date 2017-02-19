@@ -11203,6 +11203,7 @@ var app = new Vue({
     data: {
         messages: [],
         newMessage: '',
+        user: '',
         typing: false
     },
 
@@ -11211,6 +11212,7 @@ var app = new Vue({
 
         var channel = Echo.private('chat');
         channel.listenForWhisper('typing', function (e) {
+            _this.user = e.user.name;
             _this.typing = e.typing;
         });
     },
@@ -11218,22 +11220,24 @@ var app = new Vue({
 
     methods: {
         isTyping: function isTyping() {
-            // check if a user is typing
             var channel = Echo.private('chat');
-            // channel.listen('pusher:subscription_succeeded', (e) => {
+
+            // setInterval(function() {
             channel.whisper('typing', {
+                user: Laravel.user,
                 typing: true
             });
-            // });
+            // }, 400);
         },
         notTyping: function notTyping() {
-            // check if a user is typing
             var channel = Echo.private('chat');
-            // channel.listen('pusher:subscription_succeeded', (e) => {
+
+            // setTimeout(function() {
             channel.whisper('typing', {
+                user: Laravel.user,
                 typing: false
             });
-            // });
+            // }, 400);
         },
         sendMessage: function sendMessage() {
             // add new message to messages array

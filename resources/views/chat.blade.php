@@ -22,7 +22,9 @@
                                 </button>
                             </span>
                         </div>
-                        <span v-show="typing" class="help-block" style="font-style: italic;">typing...</span>
+                        <span v-show="typing" class="help-block" style="font-style: italic;">
+                            @{{ user }} is typing...
+                        </span>
                     </div>
                 </div>
             </div>
