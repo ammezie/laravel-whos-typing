@@ -24,34 +24,31 @@ const app = new Vue({
     },
 
     created() {
-        const channel = Echo.private('chat');
-            channel.listenForWhisper('typing', (e) => {
-                this.user = e.user.name;
+        Echo.private('chat')
+            .listenForWhisper('typing', (e) => {
+                this.user = e.user;
                 this.typing = e.typing;
             });
     },
 
     methods: {
         isTyping() {
-            const channel = Echo.private('chat');
-
-            // setInterval(function() {
-                channel.whisper('typing', {
+            Echo.private('chat')
+                .whisper('typing', {
                     user: Laravel.user,
                     typing: true
                 });
-            // }, 400);
         },
 
         notTyping() {
             const channel = Echo.private('chat');
             
-            // setTimeout(function() {
+            setTimeout(function() {
                 channel.whisper('typing', {
                     user: Laravel.user,
                     typing: false
                 });
-            // }, 400);
+            }, 1500);
         },
 
         sendMessage() {

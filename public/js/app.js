@@ -11210,9 +11210,8 @@ var app = new Vue({
     created: function created() {
         var _this = this;
 
-        var channel = Echo.private('chat');
-        channel.listenForWhisper('typing', function (e) {
-            _this.user = e.user.name;
+        Echo.private('chat').listenForWhisper('typing', function (e) {
+            _this.user = e.user;
             _this.typing = e.typing;
         });
     },
@@ -11220,24 +11219,20 @@ var app = new Vue({
 
     methods: {
         isTyping: function isTyping() {
-            var channel = Echo.private('chat');
-
-            // setInterval(function() {
-            channel.whisper('typing', {
+            Echo.private('chat').whisper('typing', {
                 user: Laravel.user,
                 typing: true
             });
-            // }, 400);
         },
         notTyping: function notTyping() {
             var channel = Echo.private('chat');
 
-            // setTimeout(function() {
-            channel.whisper('typing', {
-                user: Laravel.user,
-                typing: false
-            });
-            // }, 400);
+            setTimeout(function () {
+                channel.whisper('typing', {
+                    user: Laravel.user,
+                    typing: false
+                });
+            }, 1500);
         },
         sendMessage: function sendMessage() {
             // add new message to messages array
