@@ -11208,31 +11208,32 @@ var app = new Vue({
     },
 
     created: function created() {
+        var _this2 = this;
+
         var _this = this;
 
         Echo.private('chat').listenForWhisper('typing', function (e) {
-            _this.user = e.user;
-            _this.typing = e.typing;
+            _this2.user = e.user;
+            _this2.typing = e.typing;
+
+            // remove is typing indicator after 0.9s
+            setTimeout(function () {
+                _this.typing = false;
+            }, 900);
         });
     },
 
 
     methods: {
         isTyping: function isTyping() {
-            Echo.private('chat').whisper('typing', {
-                user: Laravel.user,
-                typing: true
-            });
-        },
-        notTyping: function notTyping() {
             var channel = Echo.private('chat');
 
             setTimeout(function () {
                 channel.whisper('typing', {
                     user: Laravel.user,
-                    typing: false
+                    typing: true
                 });
-            }, 1500);
+            }, 300);
         },
         sendMessage: function sendMessage() {
             // add new message to messages array

@@ -24,31 +24,30 @@ const app = new Vue({
     },
 
     created() {
+        let _this = this;
+        
         Echo.private('chat')
             .listenForWhisper('typing', (e) => {
                 this.user = e.user;
                 this.typing = e.typing;
+
+                // remove is typing indicator after 0.9s
+                setTimeout(function() {
+                    _this.typing = false
+                }, 900);
             });
     },
 
     methods: {
         isTyping() {
-            Echo.private('chat')
-                .whisper('typing', {
-                    user: Laravel.user,
-                    typing: true
-                });
-        },
+            let channel = Echo.private('chat');
 
-        notTyping() {
-            const channel = Echo.private('chat');
-            
             setTimeout(function() {
                 channel.whisper('typing', {
                     user: Laravel.user,
-                    typing: false
+                    typing: true
                 });
-            }, 1500);
+            }, 300);
         },
 
         sendMessage() {
