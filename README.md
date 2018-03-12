@@ -1,5 +1,6 @@
 # laravel-whos-typing
-Implement a who's typing feature with Laravel and Pusher
+
+Implement a who's typing feature with Laravel, Vue.js and Pusher. Follow the tutorial [https://pusher.com/tutorials/typing-indicator-laravel](https://pusher.com/tutorials/typing-indicator-laravel)
 
 ### Getting Started
 
@@ -29,7 +30,9 @@ Then run:
 php artisan key:generate
 ```
 
-### Setup Pusher
+### Prerequisites
+
+#### Setup Pusher
 
 If you don't have one already, create a free Pusher account at https://pusher.com/signup then login to your dashboard and create an app. 
 
@@ -73,3 +76,9 @@ php artisan serve
 ```
 
 and visit [http://localhost:8000/](http://localhost:8000/) to see the application in action.
+
+## Built With
+
+* [Pusher](https://pusher.com/) - APIs to enable devs building realtime features
+* [Laravel](https://laravel.com) - The PHP Framework For Web Artisans
+* [Vue.js](https://vuejs.org) - The Progressive JavaScript Framework
